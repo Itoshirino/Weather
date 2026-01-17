@@ -30,6 +30,11 @@ try {
 function showWeather(data) {
   elLoading.innerHTML = "";
 
+  if (data.cod === "404") {
+    elList.innerHTML = `City not found`;
+    return;
+  }
+
   const { name } = data;
   const { temp, humidity } = data.main;
   const { speed } = data.wind;
