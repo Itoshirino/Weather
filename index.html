@@ -5,23 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="Img/logo.jpeg" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+     <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
   </head>
   <body>
-    <div class="weather__app">
-      <h1>Weather App</h1>
-      <div class="search__box">
-        <input class="search" type="search" placeholder="Enter city name" />
-      </div>
-      <div class="weather__info">
-        <div class="weather__card"></div>
-        <h1 class="Loading">
-          Loading <span>.</span> <span>.</span> <span>.</span>
-        </h1>
-      </div>
-
+    <div class="wrapper">
+      <div class="weather__app">
+        <h1>Weather App</h1>
+        <div class="search__box">
+          <input class="search" type="search" placeholder="Enter city name" />
+          <button class="create__btn">Create</button>
+          <button class="submit__btn none">Submit</button>
+          <button class="clear__btn none">Clear</button>
+          <button class="back__btn none">Back</button>
+          <input
+            type="search"
+            class="search__create none"
+            placeholder="Enter city"
+          />
+          <input
+            type="number"
+            class="search__create1 none"
+            placeholder="Degrees"
+          />
+          <input
+            type="number"
+            class="search__create2 none"
+            placeholder="Humidity"
+          />
+          <input
+            type="number"
+            class="search__create3 none"
+            placeholder="Wind Speed"
+          />
+        </div>
+        <div class="weather__info">
+          <h1 class="Loading">
+            Loading <span>.</span> <span>.</span> <span>.</span>
+          </h1>
+        </div>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="script.js"></script>
     <noscript> JavaScript is disabled </noscript>
   </body>
