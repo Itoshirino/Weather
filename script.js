@@ -12,9 +12,11 @@ const elSubmitBtn = document.querySelector(".submit__btn");
 const elClearBtn = document.querySelector(".clear__btn");
 const elBackBtn = document.querySelector(".back__btn");
 const elwrapper = document.querySelector(".wrapper");
+elwrapper.style.backgroundImage = `url('./Img/winter.jpeg')`;
 
-
-
+if (elwrapper) {
+  elwrapper.style.backgroundImage = `url('./Img/winter.jpeg')`;
+}
 
 let element = false;
 
@@ -77,20 +79,37 @@ elSubmitBtn.addEventListener("click", () => {
       wind >= 0 &&
       cities.includes(city)
     ) {
+      let bg = "";
+      let icon = "";
+
+      if (temp <= 0) {
+        bg = "./Img/winter.jpeg";
+        icon = "./Img/winter__icon.png";
+      } else if (temp < 20) {
+        bg = "./Img/cloudy.png";
+        icon = "./Img/cloudy__icon.png";
+      } else if (temp < 50) {
+        bg = "Sunny.png";
+        icon = "./Img/sunny__icon.png";
+      } else {
+        bg = "hot.png";
+        icon = "./Img/hot__icon.png";
+      }
+
+      elwrapper.style.backgroundImage = `url('./Img/${bg}')`;
+
       elList.innerHTML = `
-      <div class="weather__card">
-        <div class="weather__top">
-          <h2>${city}</h2>
-          <img class="weather__icon"
-            src="./Img/windy__icon.png"
-            alt="Custom">
+        <div class="weather__card">
+          <div class="weather__top">
+            <h2>${city}</h2>
+            <img class="weather__icon" src="./Img/${icon}" alt="Custom">
+          </div>
+          <p class="weather__temp">${temp}°C</p>
+          <p><i class="ri-cloud-line"></i> Wind</p>
+          <p><i class="ri-water-percent-fill"></i> Humidity: ${humidity}%</p>
+          <p><i class="ri-cloud-windy-line"></i> Wind: ${wind} m/s</p>
         </div>
-        <p class="weather__temp">${temp}°C</p>
-        <p><i class="ri-cloud-line"></i> Wind</p>
-        <p><i class="ri-water-percent-fill"></i> Humidity: ${humidity}%</p>
-        <p><i class="ri-cloud-windy-line"></i> Wind: ${wind} m/s</p>
-      </div>
-    `;
+      `;
     } else {
       Toastify({
         text: "Please enter realistic values or correct city name",
@@ -99,77 +118,6 @@ elSubmitBtn.addEventListener("click", () => {
         position: "left",
         backgroundColor: "linear-gradient(to right, #ff0015, #ea2700)",
       }).showToast();
-    }
-
-    if (temp <= 0) {
-      elwrapper.style.backgroundImage = "url('./Img/winter.jpeg')";
-      elList.innerHTML = `
-      <div class="weather__card">
-        <div class="weather__top">
-          <h2>${city}</h2>
-          <img class="weather__icon"
-            src="./Img/winter__icon.png"
-            alt="Custom">
-        </div>
-        <p class="weather__temp">${temp}°C</p>
-        <p><i class="ri-cloud-line"></i> Wind</p>
-        <p><i class="ri-water-percent-fill"></i> Humidity: ${humidity}%</p>
-        <p><i class="ri-cloud-windy-line"></i> Wind: ${wind} m/s</p>
-      </div>
-    `;
-    }
-
-    if (temp >= 20) {
-      elwrapper.style.backgroundImage = "url('./Img/cloudy.png')";
-      elList.innerHTML = `
-      <div class="weather__card">
-        <div class="weather__top">
-          <h2>${city}</h2>
-          <img class="weather__icon"
-            src="./Img/cloudy__icon.png"
-            alt="Custom">
-        </div>
-        <p class="weather__temp">${temp}°C</p>
-        <p><i class="ri-cloud-line"></i> Wind</p>
-        <p><i class="ri-water-percent-fill"></i> Humidity: ${humidity}%</p>
-        <p><i class="ri-cloud-windy-line"></i> Wind: ${wind} m/s</p>
-      </div>
-      `;
-    }
-    if (temp <= 49) {
-      elwrapper.style.backgroundImage = "url('./Img/Sunny.png')";
-      elList.innerHTML = `
-      <div class="weather__card">
-        <div class="weather__top">
-          <h2>${city}</h2>
-          <img class="weather__icon"
-            src="./Img/sunny__icon.png"
-            alt="Custom">
-        </div>
-        <p class="weather__temp">${temp}°C</p>
-        <p><i class="ri-cloud-line"></i> Wind</p>
-        <p><i class="ri-water-percent-fill"></i> Humidity: ${humidity}%</p>
-        <p><i class="ri-cloud-windy-line"></i> Wind: ${wind} m/s</p>
-      </div>
-      `;
-    }
-
-    if (temp >= 50) {
-      elwrapper.style.backgroundImage = "url('./Img/hot.png')";
-      elList.innerHTML = `
-      <div class="weather__card">
-        <div class="weather__top">
-          <h2>${city}</h2>
-          <img class="weather__icon"
-            src="https://openweathermap.org/img/wn/01d@2x.png"
-            alt="Custom">
-        </div>
-        <p class="weather__temp">${temp}°C</p>
-        <p><i class="ri-cloud-line"></i> Wind</p>
-        <p><i class="ri-water-percent-fill"></i> Humidity: ${humidity}%</p>
-        <p><i class="ri-cloud-windy-line"></i> Wind: ${wind} m/s</p>
-      </div>
-      `;
     }
   } else {
     const InputValue = elSearch.value.trim();
@@ -274,18 +222,16 @@ function showWeather(data) {
     </div>
   `;
 
+  let bg = "";
   if (temp <= 0) {
-    elwrapper.style.backgroundImage = "url('./Img/winter.jpeg')";
+    bg = "./Img/winter.jpeg";
+  } else if (temp < 20) {
+    bg = "./Img/cloudy.png";
+  } else if (temp < 50) {
+    bg = "./Img/Sunny.png";
+  } else {
+    bg = "./Img/hot.png";
   }
-  if (temp >= 20) {
-    elwrapper.style.backgroundImage = "url('./Img/cloudy.png')";
-  }
-  if (temp <= 49) {
-    elwrapper.style.backgroundImage = "url('./Img/Sunny.png')";
-  }
-  if (temp >= 50) {
-    elwrapper.style.backgroundImage = "url('./Img/hot.png')";
-  }
+
+  elwrapper.style.backgroundImage = `url('./Img/${bg}')`;
 }
-
-
